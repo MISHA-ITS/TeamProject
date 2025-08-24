@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SPR311_DreamTeam_Rozetka.DAL;
+using SPR311_DreamTeam_Rozetka.DAL.Entities.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,8 +14,22 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseNpgsql("name=defaultdb");
+    options.UseNpgsql("name=PostgresLocal");
 });
+
+//add Identity
+builder.Services
+    .AddIdentity<AppUser, AppRole>(options =>
+    {
+        options.User.RequireUniqueEmail = true;
+        // Password settings
+        options.Password.RequiredUniqueChars = 0;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireDigit = false;
+        options.Password.RequireUppercase = false;
+    })
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
 
 var app = builder.Build();
 
