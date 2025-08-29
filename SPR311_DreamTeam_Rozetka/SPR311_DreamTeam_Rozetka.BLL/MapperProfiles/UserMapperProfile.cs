@@ -9,19 +9,25 @@ using System.Threading.Tasks;
 
 namespace SPR311_DreamTeam_Rozetka.BLL.MapperProfiles
 {
-    class UserMapperProfile : Profile
+    public class UserMapperProfile : Profile
     {
         public UserMapperProfile()
         {
-            //CreateUserDTO -> AppUser
+            // CreateUserDTO -> AppUser
             CreateMap<CreateUserDTO, AppUser>()
+                .ForMember(dest => dest.UserName,
+                           opt => opt.MapFrom((src, dest) =>
+                               src.Email.Contains('@') ? src.Email.Split('@')[0] : src.Email))
                 .ForMember(dest => dest.Image, opt => opt.Ignore());
 
-            //UpdateUserDTO -> AppUser
+            // UpdateUserDTO -> AppUser
             CreateMap<UpdateUserDTO, AppUser>()
+                .ForMember(dest => dest.UserName,
+                           opt => opt.MapFrom((src, dest) =>
+                               src.Email.Contains('@') ? src.Email.Split('@')[0] : src.Email))
                 .ForMember(dest => dest.Image, opt => opt.Ignore());
 
-            //UserEntity -> CategoryDTO
+            // AppUser -> UserDTO
             CreateMap<AppUser, UserDTO>();
         }
     }

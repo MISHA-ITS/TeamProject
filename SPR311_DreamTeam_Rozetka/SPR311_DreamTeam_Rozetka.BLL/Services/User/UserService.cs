@@ -31,15 +31,21 @@ namespace SPR311_DreamTeam_Rozetka.BLL.Services.User
                 return ServiceResponse.Error($"Користувач з електронною адресою {dto.Email} вже існує");
             }
 
-            var user = _mapper.Map<AppUser>(dto);
+            var user = new AppUser
+            {
+                UserName = dto.Email.Split('@')[0],
+                Email = dto.Email,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName
+            };
 
             if (dto.Image != null)
             {
-                string? imageName = await _imageService.SaveImageAsync(dto.Image, Settings.CategoriesDir);
+                string? imageName = await _imageService.SaveImageAsync(dto.Image, Settings.UsersDir);
 
                 if (!string.IsNullOrEmpty(imageName))
                 {
-                    user.Image = Settings.CategoriesDir + "/" + imageName;
+                    user.Image = Settings.UsersDir + "/" + imageName;
                 }
             }
 
@@ -50,7 +56,8 @@ namespace SPR311_DreamTeam_Rozetka.BLL.Services.User
                 return ServiceResponse.Success($"Користувача {user.UserName} успішно додано", dto);
             }
 
-            return ServiceResponse.Error($"Не вдалося створити користувача");
+            var errors = string.Join("; ", result.Errors.Select(e => e.Description));
+            return ServiceResponse.Error($"Не вдалося створити користувача: {errors}");
         }
 
         public async Task<ServiceResponse> DeleteAsync(string id)
