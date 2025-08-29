@@ -13,6 +13,6 @@ namespace SPR311_DreamTeam_Rozetka.BLL.DTOs.User
         public required string Email { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-        public IFormFile? Image { get; set; }
+        public string? Image { get; set; }
     }
 }

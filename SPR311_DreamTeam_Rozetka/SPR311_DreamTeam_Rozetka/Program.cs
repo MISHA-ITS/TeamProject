@@ -13,6 +13,10 @@ using System.Text;
 using System.Reflection;
 using SPR311_DreamTeam_Rozetka.BLL.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using FluentValidation;
+using SPR311_DreamTeam_Rozetka.BLL.Validators.Account;
+using Microsoft.Extensions.FileProviders;
+using SPR311_DreamTeam_Rozetka.BLL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +27,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 
+//Add fluent validation
+builder.Services.AddValidatorsFromAssemblyContaining<RegisterValdator>();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -88,8 +94,32 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+string rootPath = builder.Environment.ContentRootPath;
+string wwwroot = Path.Combine(rootPath, "wwwroot");
+string imagesPath = Path.Combine(wwwroot, "images");
+
+Settings.ImagesPath = imagesPath;
+Settings.RootPath = wwwroot;
+
+if (!Directory.Exists(wwwroot))
+{
+    Directory.CreateDirectory(wwwroot);
+}
+
+if (!Directory.Exists(imagesPath))
+{
+    Directory.CreateDirectory(imagesPath);
+}
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(imagesPath),
+    RequestPath = "/images"
+});
+
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
