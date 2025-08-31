@@ -32,7 +32,7 @@ namespace SPR311_DreamTeam_Rozetka.Controllers
 
             var user = await _accountService.RegisterAsync(dto);
 
-            if (user == null)
+            if (user == null || user?.PayLoad == null)
             {
                 return BadRequest("Register error");
             }
