@@ -5,6 +5,7 @@ using SPR311_DreamTeam_Rozetka.BLL.Services.User;
 using SPR311_DreamTeam_Rozetka.BLL.Services.Account;
 using SPR311_DreamTeam_Rozetka.BLL.Services.Role;
 using SPR311_DreamTeam_Rozetka.DAL;
+using SPR311_DreamTeam_Rozetka.DAL.Initializer;
 using SPR311_DreamTeam_Rozetka.DAL.Entities.Identity;
 using SPR311_DreamTeam_Rozetka.BLL.Services.JwtToken;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -123,5 +124,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+//await app.Seed();
 
 app.Run();
