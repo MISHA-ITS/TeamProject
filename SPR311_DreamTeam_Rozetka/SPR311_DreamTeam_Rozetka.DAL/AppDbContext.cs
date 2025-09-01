@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SPR311_DreamTeam_Rozetka.DAL.Entities;
 using SPR311_DreamTeam_Rozetka.DAL.Entities.Identity;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ namespace SPR311_DreamTeam_Rozetka.DAL
         AppRoleClaim, AppUserToken>
     {
         public AppDbContext(DbContextOptions options) : base(options) { }
+
+        public DbSet<ProductEntity> Products { get; set; }
+        public DbSet<CategoryEntity> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
