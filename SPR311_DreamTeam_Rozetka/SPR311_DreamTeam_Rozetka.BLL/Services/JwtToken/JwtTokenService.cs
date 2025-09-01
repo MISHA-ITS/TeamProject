@@ -3,13 +3,9 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SPR311_DreamTeam_Rozetka.BLL.Configuration;
 using SPR311_DreamTeam_Rozetka.DAL.Entities.Identity;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SPR311_DreamTeam_Rozetka.BLL.Services.JwtToken
 {

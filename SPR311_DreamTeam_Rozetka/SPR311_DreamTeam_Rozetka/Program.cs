@@ -1,23 +1,22 @@
+using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SPR311_DreamTeam_Rozetka.BLL.Services.Image;
-using SPR311_DreamTeam_Rozetka.BLL.Services.User;
-using SPR311_DreamTeam_Rozetka.BLL.Services.Account;
-using SPR311_DreamTeam_Rozetka.BLL.Services.Role;
-using SPR311_DreamTeam_Rozetka.DAL;
-using SPR311_DreamTeam_Rozetka.DAL.Initializer;
-using SPR311_DreamTeam_Rozetka.DAL.Entities.Identity;
-using SPR311_DreamTeam_Rozetka.BLL.Services.JwtToken;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.Reflection;
-using SPR311_DreamTeam_Rozetka.BLL.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using FluentValidation;
-using SPR311_DreamTeam_Rozetka.BLL.Validators.Account;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.IdentityModel.Tokens;
 using SPR311_DreamTeam_Rozetka.BLL;
+using SPR311_DreamTeam_Rozetka.BLL.Configuration;
+using SPR311_DreamTeam_Rozetka.BLL.Services.Account;
+using SPR311_DreamTeam_Rozetka.BLL.Services.Image;
+using SPR311_DreamTeam_Rozetka.BLL.Services.JwtToken;
+using SPR311_DreamTeam_Rozetka.BLL.Services.Product;
+using SPR311_DreamTeam_Rozetka.BLL.Services.Role;
+using SPR311_DreamTeam_Rozetka.BLL.Services.User;
+using SPR311_DreamTeam_Rozetka.BLL.Validators.Account;
+using SPR311_DreamTeam_Rozetka.DAL;
+using SPR311_DreamTeam_Rozetka.DAL.Entities.Identity;
+using SPR311_DreamTeam_Rozetka.DAL.Repositories.Product;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +26,7 @@ builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
+builder.Services.AddScoped<IProductService, ProductSevice>();
 
 //Add fluent validation
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterValdator>();
@@ -40,6 +40,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseNpgsql("name=PostgresLocal");
 });
+
+
+//Add repositories
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
 
 //Add Jwt
 string secretkey = builder.Configuration["JwtSettings:SecretKey"]
