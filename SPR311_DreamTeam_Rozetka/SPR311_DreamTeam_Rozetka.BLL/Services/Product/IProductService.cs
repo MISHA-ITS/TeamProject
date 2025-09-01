@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SPR311_DreamTeam_Rozetka.BLL.DTOs.Product;
 
 namespace SPR311_DreamTeam_Rozetka.BLL.Services.Product
 {
-    internal interface IProductService
+    public interface IProductService
     {
+        Task<ServiceResponse> CreateAsync(CreateProductDto dto);
+        Task<ServiceResponse> UpdateAsync(UpdateProductDto dto);
+        Task<ServiceResponse> DeleteAsync(int id);
+        Task<ServiceResponse> GetByIdAsync(int id);
+        Task<ServiceResponse> GetAllAsync();
     }
 }

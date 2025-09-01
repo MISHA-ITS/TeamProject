@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SPR311_DreamTeam_Rozetka.BLL.Services
+﻿namespace SPR311_DreamTeam_Rozetka.BLL.Services
 {
     public class ServiceResponse
     {

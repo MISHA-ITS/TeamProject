@@ -2,7 +2,6 @@ using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using SPR311_DreamTeam_Rozetka.BLL;
@@ -15,9 +14,7 @@ using SPR311_DreamTeam_Rozetka.BLL.Services.User;
 using SPR311_DreamTeam_Rozetka.BLL.Validators.Account;
 using SPR311_DreamTeam_Rozetka.DAL;
 using SPR311_DreamTeam_Rozetka.DAL.Entities.Identity;
-using SPR311_DreamTeam_Rozetka.DAL.Initializer;
 using SPR311_DreamTeam_Rozetka.DAL.Repositories.Product;
-using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -4,11 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SPR311_DreamTeam_Rozetka.DAL.Entities.Identity;
 using SPR311_DreamTeam_Rozetka.DAL.Settings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SPR311_DreamTeam_Rozetka.DAL.Initializer
 {
