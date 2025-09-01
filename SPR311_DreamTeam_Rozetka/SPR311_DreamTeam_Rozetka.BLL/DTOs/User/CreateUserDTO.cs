@@ -1,4 +1,6 @@
-﻿namespace SPR311_DreamTeam_Rozetka.BLL.DTOs.User
+﻿using Microsoft.AspNetCore.Http;
+
+namespace SPR311_DreamTeam_Rozetka.BLL.DTOs.User
 {
     public class CreateUserDTO
     {

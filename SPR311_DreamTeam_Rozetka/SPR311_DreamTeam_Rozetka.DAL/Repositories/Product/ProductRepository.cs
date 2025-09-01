@@ -31,7 +31,7 @@ namespace SPR311_DreamTeam_Rozetka.DAL.Repositories.Product
             return _context.Products;
         }
 
-        public async Task<ProductEntity> GetByIdAsync(int id)
+        public async Task<ProductEntity> GetByIdAsync(Guid id)
         {
             return await _context.Products.FirstOrDefaultAsync(p => p.id == id);
         }

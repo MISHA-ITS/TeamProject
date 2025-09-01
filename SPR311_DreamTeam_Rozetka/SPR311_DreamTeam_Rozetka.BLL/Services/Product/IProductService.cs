@@ -6,8 +6,8 @@ namespace SPR311_DreamTeam_Rozetka.BLL.Services.Product
     {
         Task<ServiceResponse> CreateAsync(CreateProductDto dto);
         Task<ServiceResponse> UpdateAsync(UpdateProductDto dto);
-        Task<ServiceResponse> DeleteAsync(int id);
-        Task<ServiceResponse> GetByIdAsync(int id);
+        Task<ServiceResponse> DeleteAsync(Guid id);
+        Task<ServiceResponse> GetByIdAsync(Guid id);
         Task<ServiceResponse> GetAllAsync();
     }
 }

@@ -35,7 +35,7 @@ namespace SPR311_DreamTeam_Rozetka.BLL.Services.Product
             return ServiceResponse.Error("Продукт не створено");
         }
 
-        public async Task<ServiceResponse> DeleteAsync(int id)
+        public async Task<ServiceResponse> DeleteAsync(Guid id)
         {
             var entity = await _productRepository.GetByIdAsync(id);
             
@@ -62,7 +62,7 @@ namespace SPR311_DreamTeam_Rozetka.BLL.Services.Product
             return ServiceResponse.Success("Продукти отримано", dtos);
         }
 
-        public async Task<ServiceResponse> GetByIdAsync(int id)
+        public async Task<ServiceResponse> GetByIdAsync(Guid id)
         {
             var entity = await _productRepository.GetByIdAsync(id);
             if (entity != null)

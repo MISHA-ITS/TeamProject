@@ -12,8 +12,8 @@ using SPR311_DreamTeam_Rozetka.DAL;
 namespace SPR311_DreamTeam_Rozetka.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250901122828_Add category and product tables1")]
-    partial class Addcategoryandproducttables1
+    [Migration("20250901143142_Add category and product tables")]
+    partial class Addcategoryandproducttables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,9 @@ namespace SPR311_DreamTeam_Rozetka.DAL.Migrations
 
             modelBuilder.Entity("SPR311_DreamTeam_Rozetka.DAL.Entities.CategoryEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
@@ -257,14 +255,12 @@ namespace SPR311_DreamTeam_Rozetka.DAL.Migrations
 
             modelBuilder.Entity("SPR311_DreamTeam_Rozetka.DAL.Entities.ProductEntity", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("uuid");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
@@ -277,9 +273,6 @@ namespace SPR311_DreamTeam_Rozetka.DAL.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("StockQuantity")
-                        .HasColumnType("integer");
 
                     b.HasKey("id");
 

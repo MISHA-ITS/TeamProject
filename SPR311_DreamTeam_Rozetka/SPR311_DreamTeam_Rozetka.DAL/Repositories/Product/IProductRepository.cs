@@ -7,7 +7,7 @@ namespace SPR311_DreamTeam_Rozetka.DAL.Repositories.Product
         Task<bool> CreateAsync(ProductEntity entity);
         Task<bool> UpdateAsync(ProductEntity entity);
         Task<bool> DeleteAsync(ProductEntity entity);
-        Task<ProductEntity> GetByIdAsync(int id);
+        Task<ProductEntity> GetByIdAsync(Guid id);
         IQueryable<ProductEntity> GetAll();
         bool IsUniqueName(ProductEntity entity);
     }
