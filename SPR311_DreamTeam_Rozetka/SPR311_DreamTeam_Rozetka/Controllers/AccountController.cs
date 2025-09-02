@@ -53,5 +53,12 @@ namespace SPR311_DreamTeam_Rozetka.Controllers
             var response = await _accountService.LoginAsync(dto);
             return response.IsSuccess ? Ok(response) : BadRequest(response);
         }
+
+        [HttpPost("google-login")]
+        public async Task<IActionResult> GoogleLoginAsync(GoogleLoginDTO dto)
+        {
+            var response = await _accountService.GoogleLoginAsync(dto);
+            return response.IsSuccess ? Ok(response) : BadRequest(response);
+        }
     }
 }

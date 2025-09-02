@@ -25,9 +25,10 @@ namespace SPR311_DreamTeam_Rozetka.BLL.Services.JwtToken
             {
                 new Claim("userId", user.Id),
                 new Claim("email", user.Email ?? ""),
-                new Claim("name", user.UserName ?? ""),
+                //new Claim("name", user.UserName ?? ""),
                 new Claim("firstname", user.FirstName ?? ""),
-                new Claim("lastname" , user.LastName ?? "")
+                new Claim("lastname" , user.LastName ?? ""),
+                new Claim("image", user.Image != null? user.Image : "")
             };
 
             var roles = _userManager.GetRolesAsync(user).Result;
