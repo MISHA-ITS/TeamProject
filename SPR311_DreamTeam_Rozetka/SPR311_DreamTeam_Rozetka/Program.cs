@@ -90,6 +90,17 @@ builder.Services
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("React_cors", options =>
+    {
+        options.WithOrigins("http://localhost:5173")
+                      .AllowCredentials()
+                      .AllowAnyMethod()
+                      .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

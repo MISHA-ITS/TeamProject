@@ -6,5 +6,6 @@ namespace SPR311_DreamTeam_Rozetka.BLL.Services.Account
     {
         Task<ServiceResponse> LoginAsync(LoginDTO dto);
         Task<ServiceResponse?> RegisterAsync(RegisterDTO dto);
+        Task<ServiceResponse> GoogleLoginAsync(GoogleLoginDTO dto);
     }
 }

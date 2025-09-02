@@ -68,6 +68,87 @@ namespace SPR311_DreamTeam_Rozetka.BLL.Services.Account
             return ServiceResponse.Success("Успішний вхід", jwtToken);
         }
 
+        public async Task<ServiceResponse> GoogleLoginAsync(GoogleLoginDTO dto)
+        {
+            try
+            {
+                // Спочатку перевіряємо чи існує користувач з цим Google ID
+                var user = await _userManager.FindByLoginAsync("Google", dto.GoogleId);
+
+                if (user == null)
+                {
+                    // Якщо користувача з Google ID не знайдено, перевіряємо по email
+                    user = await _userManager.FindByEmailAsync(dto.Email);
+
+                    if (user == null)
+                    {
+                        // Створюємо нового користувача
+                        user = new AppUser
+                        {
+                            UserName = dto.Email,
+                            Email = dto.Email,
+                            FirstName = dto.FirstName,
+                            LastName = dto.LastName,
+                            Image = dto.Picture,
+                            EmailConfirmed = true // Google користувачі вже підтверджені
+                        };
+
+                        var result = await _userManager.CreateAsync(user);
+
+                        if (!result.Succeeded)
+                        {
+                            return ServiceResponse.Error("Помилка створення користувача: " + result.Errors.First().Description);
+                        }
+                    }
+
+                    // Додаємо Google login до AspNetUserLogins
+                    var addLoginResult = await _userManager.AddLoginAsync(user, new UserLoginInfo("Google", dto.GoogleId, "Google"));
+
+                    if (!addLoginResult.Succeeded)
+                    {
+                        return ServiceResponse.Error("Помилка додавання Google акаунту: " + addLoginResult.Errors.First().Description);
+                    }
+                }
+                else
+                {
+                    // Оновлюємо інформацію користувача якщо потрібно
+                    bool updated = false;
+
+                    if (string.IsNullOrEmpty(user.FirstName) && !string.IsNullOrEmpty(dto.FirstName))
+                    {
+                        user.FirstName = dto.FirstName;
+                        updated = true;
+                    }
+
+                    if (string.IsNullOrEmpty(user.LastName) && !string.IsNullOrEmpty(dto.LastName))
+                    {
+                        user.LastName = dto.LastName;
+                        updated = true;
+                    }
+
+                    if (string.IsNullOrEmpty(user.Image) && !string.IsNullOrEmpty(dto.Picture))
+                    {
+                        user.Image = dto.Picture;
+                        updated = true;
+                    }
+
+                    if (updated)
+                    {
+                        await _userManager.UpdateAsync(user);
+                    }
+                }
+
+                // Генеруємо JWT токен
+                string jwtToken = _jwtTokenService.GenerateToken(user);
+
+                return ServiceResponse.Success("Успішний вхід через Google", jwtToken);
+            }
+            catch (Exception ex)
+            {
+                return ServiceResponse.Error($"Помилка Google автентифікації: {ex.Message}");
+            }
+        }
+
         private async Task<bool> IsUniqueEmailAsync(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
