@@ -1,7 +1,16 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\SPR311_DreamTeam_Rozetka",
+    "\\SPR311_DreamTeam_Rozetka\\SPR311_DreamTeam_Rozetka",
+    "\\SPR311_DreamTeam_Rozetka\\SPR311_DreamTeam_Rozetka.BLL",
+    "\\SPR311_DreamTeam_Rozetka\\SPR311_DreamTeam_Rozetka.BLL\\DTOs",
+    "\\SPR311_DreamTeam_Rozetka\\SPR311_DreamTeam_Rozetka.BLL\\DTOs\\Category",
+    "\\SPR311_DreamTeam_Rozetka\\SPR311_DreamTeam_Rozetka.BLL\\DTOs\\Product",
+    "\\SPR311_DreamTeam_Rozetka\\SPR311_DreamTeam_Rozetka.DAL",
+    "\\SPR311_DreamTeam_Rozetka\\SPR311_DreamTeam_Rozetka.DAL\\Entities",
+    "\\SPR311_DreamTeam_Rozetka\\SPR311_DreamTeam_Rozetka.DAL\\Entities\\Identity"
   ],
-  "SelectedNode": "\\SPR311_DreamTeam_Rozetka.sln",
+  "SelectedNode": "\\SPR311_DreamTeam_Rozetka\\SPR311_DreamTeam_Rozetka.sln",
   "PreviewInSolutionExplorer": false
 }
