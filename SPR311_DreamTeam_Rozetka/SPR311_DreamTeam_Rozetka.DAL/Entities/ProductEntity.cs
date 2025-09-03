@@ -6,7 +6,7 @@ namespace SPR311_DreamTeam_Rozetka.DAL.Entities
     public class ProductEntity
     {
         [Key]
-        public Guid id {  get; set; }
+        public Guid Id {  get; set; }
 
         [Required]
         [StringLength(100)]

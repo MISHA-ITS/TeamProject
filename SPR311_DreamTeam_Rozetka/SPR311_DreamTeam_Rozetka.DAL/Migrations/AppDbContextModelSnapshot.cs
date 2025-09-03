@@ -252,7 +252,7 @@ namespace SPR311_DreamTeam_Rozetka.DAL.Migrations
 
             modelBuilder.Entity("SPR311_DreamTeam_Rozetka.DAL.Entities.ProductEntity", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
@@ -271,7 +271,7 @@ namespace SPR311_DreamTeam_Rozetka.DAL.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 

@@ -33,7 +33,7 @@ namespace SPR311_DreamTeam_Rozetka.DAL.Repositories.Product
 
         public async Task<ProductEntity> GetByIdAsync(Guid id)
         {
-            return await _context.Products.FirstOrDefaultAsync(p => p.id == id);
+            return await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public bool IsUniqueName(ProductEntity entity)
