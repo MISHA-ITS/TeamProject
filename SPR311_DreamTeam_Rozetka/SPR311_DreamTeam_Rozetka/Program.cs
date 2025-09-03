@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using SPR311_DreamTeam_Rozetka.BLL;
 using SPR311_DreamTeam_Rozetka.BLL.Configuration;
 using SPR311_DreamTeam_Rozetka.BLL.Services.Account;
+using SPR311_DreamTeam_Rozetka.BLL.Services.Category;
 using SPR311_DreamTeam_Rozetka.BLL.Services.Image;
 using SPR311_DreamTeam_Rozetka.BLL.Services.JwtToken;
 using SPR311_DreamTeam_Rozetka.BLL.Services.Product;
@@ -15,6 +16,7 @@ using SPR311_DreamTeam_Rozetka.BLL.Services.User;
 using SPR311_DreamTeam_Rozetka.BLL.Validators.Account;
 using SPR311_DreamTeam_Rozetka.DAL;
 using SPR311_DreamTeam_Rozetka.DAL.Entities.Identity;
+using SPR311_DreamTeam_Rozetka.DAL.Repositories.Category;
 using SPR311_DreamTeam_Rozetka.DAL.Repositories.Product;
 using System.Text;
 
@@ -27,6 +29,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<IProductService, ProductSevice>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 //Add fluent validation
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterValdator>();
@@ -44,6 +47,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 //Add repositories
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
 //Add Jwt
