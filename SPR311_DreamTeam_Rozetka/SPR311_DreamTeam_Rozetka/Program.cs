@@ -15,6 +15,7 @@ using SPR311_DreamTeam_Rozetka.BLL.Services.User;
 using SPR311_DreamTeam_Rozetka.BLL.Validators.Account;
 using SPR311_DreamTeam_Rozetka.DAL;
 using SPR311_DreamTeam_Rozetka.DAL.Entities.Identity;
+using SPR311_DreamTeam_Rozetka.DAL.Repositories.Category;
 using SPR311_DreamTeam_Rozetka.DAL.Repositories.Product;
 using System.Text;
 
@@ -44,6 +45,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 //Add repositories
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
 //Add Jwt
