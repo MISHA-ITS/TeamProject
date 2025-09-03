@@ -14,8 +14,8 @@ namespace SPR311_DreamTeam_Rozetka.BLL.DTOs.Product
         public string? Description { get; set; }
 
         [Range(0.01, double.MaxValue)]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
-        public Guid CategoryId { get; set; }
+        public Guid? CategoryId { get; set; }
     }
 }

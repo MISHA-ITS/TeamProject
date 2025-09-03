@@ -6,7 +6,7 @@ namespace SPR311_DreamTeam_Rozetka.DAL.Entities
     public class ProductEntity
     {
         [Key]
-        public Guid id {  get; set; }
+        public Guid Id {  get; set; }
 
         [Required]
         [StringLength(100)]
@@ -19,7 +19,7 @@ namespace SPR311_DreamTeam_Rozetka.DAL.Entities
         public decimal Price { get; set; }
 
         [ForeignKey("Category")]
-        public Guid CategoryId { get; set; }
+        public Guid? CategoryId { get; set; }
 
         public virtual CategoryEntity? Category { get; set; }
     }

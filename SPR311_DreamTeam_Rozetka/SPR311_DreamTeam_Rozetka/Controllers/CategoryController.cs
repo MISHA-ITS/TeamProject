@@ -36,7 +36,14 @@ namespace SPR311_DreamTeam_Rozetka.Controllers
             return response.IsSuccess ? Ok(response) : BadRequest(response);
         }
         [HttpGet]
-        public async Task<IActionResult> GetAsync()
+        public async Task<IActionResult> GetAsync(Guid id)
+        {
+            var response = await _categoryService.GetByIdAsync( id);
+            return response.IsSuccess ? Ok(response) : BadRequest(response);
+        }
+
+        [HttpGet("List")]
+        public async Task<IActionResult> GetAllAsync()
         {
             var response = await _categoryService.GetAllAsync();
             return response.IsSuccess ? Ok(response) : BadRequest(response);
