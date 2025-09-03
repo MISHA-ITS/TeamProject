@@ -15,6 +15,7 @@ using SPR311_DreamTeam_Rozetka.BLL.Services.Role;
 using SPR311_DreamTeam_Rozetka.BLL.Services.User;
 using SPR311_DreamTeam_Rozetka.BLL.Validators.Account;
 using SPR311_DreamTeam_Rozetka.DAL;
+using SPR311_DreamTeam_Rozetka.DAL.Initializer;
 using SPR311_DreamTeam_Rozetka.DAL.Entities.Identity;
 using SPR311_DreamTeam_Rozetka.DAL.Repositories.Category;
 using SPR311_DreamTeam_Rozetka.DAL.Repositories.Product;
@@ -94,16 +95,7 @@ builder.Services
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("React_cors", options =>
-    {
-        options.WithOrigins("http://localhost:5173")
-                      .AllowCredentials()
-                      .AllowAnyMethod()
-                      .AllowAnyHeader();
-    });
-});
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -136,6 +128,14 @@ app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(imagesPath),
     RequestPath = "/images"
+});
+
+app.UseCors(opt =>
+{
+    opt.AllowAnyHeader()
+       .AllowAnyMethod()
+       .AllowCredentials()
+       .WithOrigins(builder.Configuration["ClientAppUrl"]!);
 });
 
 app.UseHttpsRedirection();

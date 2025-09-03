@@ -75,10 +75,16 @@ namespace SPR311_DreamTeam_Rozetka.BLL.Services.User
 
         public async Task<ServiceResponse> GetAllAsync()
         {
-            var users = await Task.FromResult(_userManager.Users.ToList());
-
-            var dtos = _mapper.Map<List<UserDTO>>(users);
-
+            var users = _userManager.Users.ToList();
+            var dtos = new List<UserDTO>();
+            foreach (var user in users)
+            {
+                var userDto = _mapper.Map<UserDTO>(user);
+                // Отримуємо ролі користувача
+                var roles = await _userManager.GetRolesAsync(user);
+                userDto.Roles = roles.ToArray();
+                dtos.Add(userDto);
+            }
             return ServiceResponse.Success("Користувачів отримано", dtos);
         }
 

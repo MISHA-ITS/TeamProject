@@ -55,7 +55,7 @@ namespace SPR311_DreamTeam_Rozetka.Controllers
         }
 
         [HttpPost("google-login")]
-        public async Task<IActionResult> GoogleLoginAsync(GoogleLoginDTO dto)
+        public async Task<IActionResult> GoogleLoginAsync([FromForm] GoogleLoginDTO dto)
         {
             var response = await _accountService.GoogleLoginAsync(dto);
             return response.IsSuccess ? Ok(response) : BadRequest(response);
