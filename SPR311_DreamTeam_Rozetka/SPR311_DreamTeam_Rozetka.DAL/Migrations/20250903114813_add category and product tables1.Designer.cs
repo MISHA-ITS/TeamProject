@@ -12,8 +12,8 @@ using SPR311_DreamTeam_Rozetka.DAL;
 namespace SPR311_DreamTeam_Rozetka.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250901143142_Add category and product tables")]
-    partial class Addcategoryandproducttables
+    [Migration("20250903114813_add category and product tables1")]
+    partial class addcategoryandproducttables1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -255,7 +255,7 @@ namespace SPR311_DreamTeam_Rozetka.DAL.Migrations
 
             modelBuilder.Entity("SPR311_DreamTeam_Rozetka.DAL.Entities.ProductEntity", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
@@ -274,7 +274,7 @@ namespace SPR311_DreamTeam_Rozetka.DAL.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
