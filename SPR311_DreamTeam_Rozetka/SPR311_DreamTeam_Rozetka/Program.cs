@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using SPR311_DreamTeam_Rozetka.BLL;
 using SPR311_DreamTeam_Rozetka.BLL.Configuration;
 using SPR311_DreamTeam_Rozetka.BLL.Services.Account;
+using SPR311_DreamTeam_Rozetka.BLL.Services.Category;
 using SPR311_DreamTeam_Rozetka.BLL.Services.Image;
 using SPR311_DreamTeam_Rozetka.BLL.Services.JwtToken;
 using SPR311_DreamTeam_Rozetka.BLL.Services.Product;
@@ -28,6 +29,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<IProductService, ProductSevice>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 //Add fluent validation
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterValdator>();
