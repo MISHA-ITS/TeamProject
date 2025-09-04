@@ -3,10 +3,10 @@ import axios from "axios";
 import type { IUserItem } from "./typs";
 import type { IApiResponse } from "./typs";
 import UserRow from "./UserRow";
+import EnvConfig from "../../config/env.ts";
 
 const UsersList = () => {
-    const urlServer = "http://localhost:5137/";
-    const urlGetUsersList = `${urlServer}api/user/List`;
+    const urlGetUsersList = `${EnvConfig.API_URL}api/user/List`;
 
     const [users, setUsers] = useState<IUserItem[]>([]);
 
@@ -36,7 +36,6 @@ const UsersList = () => {
                         <UserRow
                             key={user.id}
                             user={user}
-                            urlServer={urlServer}
                             initials={initials}
                         />
                     ))}
