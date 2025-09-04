@@ -1,42 +1,30 @@
 import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Sidebar from "../pages/components/Sidebar.tsx";
+import Header from "../pages/components/Header.tsx";
 
 const MainLayout: React.FC = () => {
     return (
-        <div className="min-h-screen flex flex-col bg-neutral-50 dark:bg-neutral-900">
+        <div className="min-h-screen flex flex-col bg-white">
             {/* Header */}
-            <header className="bg-white dark:bg-neutral-800 shadow-sm border-b border-black/10 dark:border-white/10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-                    <Link to="/" className="text-lg font-bold text-neutral-800 dark:text-neutral-100">
-                        Наш магазин
-                    </Link>
+            <Header/>
 
-                    <nav className="flex items-center gap-4">
-                        <Link
-                            to="/usersList"
-                            className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white"
-                        >
-                            Користувачі
-                        </Link>
-                        <Link
-                            to="/login"
-                            className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white"
-                        >
-                            Вхід
-                        </Link>
-                    </nav>
-                </div>
-            </header>
+            {/* Main Content + Sidebar */}
+            <div className="flex flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-20 pb-6 gap-6">
+                {/* Sidebar (1/4 ширини) */}
+                <Sidebar />
 
-            {/* Main Content */}
-            <main className="bg-white flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
-                <Outlet />
-            </main>
+                {/* Основний контент (3/4 ширини) */}
+                <main className="bg-white flex-1 p-6 rounded-lg shadow">
+                    <Outlet />
+                </main>
+            </div>
 
             {/* Footer */}
-            <footer className="bg-white dark:bg-neutral-800 border-t border-black/10 dark:border-white/10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-sm text-neutral-500 dark:text-neutral-400 text-center">
-                    © {new Date().getFullYear()} Rozetka. Усі права захищені.
+            <footer className="bg-white border-t border-black/10">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-sm text-gray-500 text-center">
+                    © {new Date().getFullYear()} © 2001–2025 Інтернет-магазин «Розетка™» — Щоразу що треба
+                    ТМ використовується на підставі ліцензії правовласника RozetkaLTD.
                 </div>
             </footer>
         </div>

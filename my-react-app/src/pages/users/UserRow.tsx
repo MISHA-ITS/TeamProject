@@ -1,4 +1,4 @@
-import type {IUserRowProps} from "./typs";
+import type {IUserRowProps} from "../typs.ts";
 import * as React from "react";
 import EnvConfig from "../../config/env.ts";
 import {Link} from "react-router-dom";

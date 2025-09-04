@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import type { IUserItem } from "./typs";
-import type { IApiResponse } from "./typs";
+import type { IUserItem } from "../typs.ts";
+import type { IApiResponse } from "../typs.ts";
 import UserRow from "./UserRow";
 import EnvConfig from "../../config/env.ts";
 
@@ -26,7 +26,7 @@ const UsersList = () => {
 
     return (
         <div className="max-w-4xl mx-auto mt-10">
-            <h1 className="text-3xl font-bold text-center mb-6">Users List</h1>
+            <h1 className="text-3xl font-bold text-center mb-6">Зареєстровані користувачі</h1>
 
             {users.length === 0 ? (
                 <p className="text-center text-gray-500">Користувачів не знайдено</p>

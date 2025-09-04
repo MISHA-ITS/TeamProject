@@ -18,17 +18,18 @@ export interface IUserRowProps {
     initials: (name: string | null) => string;
 }
 
-export interface ICategory {
+export interface ICategoryItem {
     id: string;
     name: string;
     description?: string;
+    image?: string;
 }
 
-export interface IProduct {
+export interface IProductItem {
     id: string;
     name: string;
     description: string;
     price: number;
     image: string | null;
-    categories: ICategory[];
+    categories: ICategoryItem[];
 }
