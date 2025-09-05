@@ -62,6 +62,22 @@ namespace SPR311_DreamTeam_Rozetka.Controllers
             return response.IsSuccess ? Ok(response) : BadRequest(response);
         }
 
+        // Додати роль юзеру
+        [HttpPost("{userId}/roles/{roleName}")]
+        public async Task<IActionResult> AddRoleToUser(AddRoleToUserDTO dto)
+        {
+            var response = await _roleService.AddRoleToUserAsync(dto);
+            return response.IsSuccess ? Ok(response) : BadRequest(response);
+        }
+
+        // Видалити роль у юзера
+        [HttpDelete("{userId}/roles/{roleName}")]
+        public async Task<IActionResult> RemoveRoleFromUser(DeleteRoleFromUserDTO dto)
+        {
+            var response = await _roleService.RemoveRoleFromUserAsync(dto);
+            return response.IsSuccess ? Ok(response) : BadRequest(response);
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAsync(string? id)
         {

@@ -2,6 +2,7 @@
 using SPR311_DreamTeam_Rozetka.BLL.DTOs.Account;
 using SPR311_DreamTeam_Rozetka.BLL.Services.JwtToken;
 using SPR311_DreamTeam_Rozetka.DAL.Entities.Identity;
+using SPR311_DreamTeam_Rozetka.DAL.Settings;
 using System.Text;
 
 namespace SPR311_DreamTeam_Rozetka.BLL.Services.Account
@@ -41,6 +42,7 @@ namespace SPR311_DreamTeam_Rozetka.BLL.Services.Account
             if (result.Succeeded)
             {
                 string jwtToken = _jwtTokenService.GenerateToken(user);
+                await _userManager.AddToRoleAsync(user, RoleSettings.UserRoleName);
 
                 return ServiceResponse.Success("Реєтрація успішна", jwtToken);
             }
@@ -97,6 +99,7 @@ namespace SPR311_DreamTeam_Rozetka.BLL.Services.Account
 
                         if (!result.Succeeded)
                         {
+                            await _userManager.AddToRoleAsync(user, RoleSettings.UserRoleName);
                             return ServiceResponse.Error("Помилка створення користувача: " + result.Errors.First().Description);
                         }
                     }
