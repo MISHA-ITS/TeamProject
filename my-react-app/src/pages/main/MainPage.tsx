@@ -6,7 +6,7 @@ const MainPage : React.FC = () => {
             <img
                 src="https://xl-static.rozetka.com.ua/assets/img/main/rozetka.png"
                 alt="Logo"
-                style={{ display: 'block', margin: '0 auto', transform: 'scale(0.5)', maxWidth: '100%', height: 'auto' }}
+                style={{ display: 'block', margin: '0 auto', transform: 'scale(0.9)', width: '50%', height: 'auto' }}
             />
             <p style={{textAlign:'center'}}>TEAM-PROJECT</p>
         </div>

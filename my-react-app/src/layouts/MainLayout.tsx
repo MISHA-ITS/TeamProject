@@ -23,7 +23,7 @@ const MainLayout: React.FC = () => {
             {/* Footer */}
             <footer className="bg-white border-t border-black/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-sm text-gray-500 text-center">
-                    © {new Date().getFullYear()} © 2001–2025 Інтернет-магазин «Розетка™» — Щоразу що треба
+                    © 2001–{new Date().getFullYear()} Інтернет-магазин «Розетка™» — Щоразу що треба
                     ТМ використовується на підставі ліцензії правовласника RozetkaLTD.
                 </div>
             </footer>
