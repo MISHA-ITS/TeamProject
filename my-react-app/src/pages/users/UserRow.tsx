@@ -40,16 +40,16 @@ const UserRow : React.FC<IUserRowProps> = ({ user, initials }) => {
 
                     {/* Кнопки */}
                     <div className="flex gap-2">
-                        <button className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-700"
+                        <Link to="/EditUserPage" className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-700"
                                 onClick={() => alert(`Edit user ${user.id}`)}
                         >
                             Редагувати
-                        </button>
-                        <button className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-700"
+                        </Link>
+                        <Link to="/DelitUserPage" className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-700"
                                 onClick={() => alert(`Delete user ${user.id}`)}
                         >
                             Видалити
-                        </button>
+                        </Link>
                     </div>
                 </li>
             </Link>

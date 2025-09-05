@@ -2,6 +2,7 @@
 using SPR311_DreamTeam_Rozetka.BLL.DTOs.Account;
 using SPR311_DreamTeam_Rozetka.BLL.Services.Account;
 using SPR311_DreamTeam_Rozetka.BLL.Validators.Account;
+using System.Xml;
 
 namespace SPR311_DreamTeam_Rozetka.Controllers
 {
@@ -55,7 +56,7 @@ namespace SPR311_DreamTeam_Rozetka.Controllers
         }
 
         [HttpPost("google-login")]
-        public async Task<IActionResult> GoogleLoginAsync([FromForm] GoogleLoginDTO dto)
+        public async Task<IActionResult> GoogleLoginAsync([FromBody] GoogleLoginDTO dto)
         {
             var response = await _accountService.GoogleLoginAsync(dto);
             return response.IsSuccess ? Ok(response) : BadRequest(response);
