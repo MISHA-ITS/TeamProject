@@ -1,7 +1,8 @@
-import type {IUserRowProps} from "../typs.ts";
+import type {IUserRowProps} from "../types.ts";
 import * as React from "react";
 import EnvConfig from "../../config/env.ts";
 import {Link} from "react-router-dom";
+import {FaPen, FaTrash} from "react-icons/fa";
 
 const UserRow : React.FC<IUserRowProps> = ({ user, initials }) => {
     return (
@@ -39,17 +40,14 @@ const UserRow : React.FC<IUserRowProps> = ({ user, initials }) => {
                     </div>
 
                     {/* Кнопки */}
-                    <div className="flex gap-2">
-                        <Link to="/EditUserPage" className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-700"
-                                onClick={() => alert(`Edit user ${user.id}`)}
-                        >
-                            Редагувати
-                        </Link>
-                        <Link to="/DelitUserPage" className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-700"
-                                onClick={() => alert(`Delete user ${user.id}`)}
-                        >
-                            Видалити
-                        </Link>
+                    <div className="flex gap-2 ml-auto">
+                        <button className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-700 transition-colors flex items-center gap-1" onClick={() => alert(`Edit user ${user.id}`)}>
+                            Редагувати <FaPen />
+                        </button>
+                        <button className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-700 transition-colors flex items-center gap-1" onClick={() => alert(`Delete user ${user.id}`)}>
+                            Видалити <FaTrash />
+                        </button>
+
                     </div>
                 </li>
             </Link>
