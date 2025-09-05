@@ -9,5 +9,7 @@ namespace SPR311_DreamTeam_Rozetka.BLL.Services.Role
         Task<ServiceResponse> DeleteAsync(string id);
         Task<ServiceResponse> GetByIdAsync(string id);
         Task<ServiceResponse> GetAllAsync();
+        Task<ServiceResponse> AddRoleToUserAsync(AddRoleToUserDTO dto);
+        Task<ServiceResponse> RemoveRoleFromUserAsync(DeleteRoleFromUserDTO dto);
     }
 }

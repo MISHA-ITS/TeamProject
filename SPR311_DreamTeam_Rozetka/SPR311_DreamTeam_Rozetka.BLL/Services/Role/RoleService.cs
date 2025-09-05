@@ -10,14 +10,14 @@ namespace SPR311_DreamTeam_Rozetka.BLL.Services.Role
     public class RoleService : IRoleService
     {
         private readonly RoleManager<AppRole> _roleManager;
-        private readonly IImageService _imageService;
+        private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
 
-        public RoleService(RoleManager<AppRole> roleManager, IMapper mapper, IImageService imageService)
+        public RoleService(RoleManager<AppRole> roleManager, IMapper mapper, UserManager<AppUser> userManager)
         {
             _roleManager = roleManager;
             _mapper = mapper;
-            _imageService = imageService;
+            _userManager = userManager;
         }
 
 
@@ -94,6 +94,49 @@ namespace SPR311_DreamTeam_Rozetka.BLL.Services.Role
             var dto = _mapper.Map<RoleDTO>(entity);
 
             return ServiceResponse.Success($"Роль з id {id} отримано", dto);
+        }
+
+        // Додати конкретну роль юзеру
+        public async Task<ServiceResponse> AddRoleToUserAsync(AddRoleToUserDTO dto)
+        {
+            var user = await _userManager.FindByIdAsync(dto.userId);
+            if (user == null)
+            {
+                return ServiceResponse.Error($"Користувач з id {dto.userId} не знайдено");
+            }
+
+            // Перевірити чи роль існує
+            if (!await _roleManager.RoleExistsAsync(dto.roleName))
+            {
+                await _roleManager.CreateAsync(new AppRole { Name = dto.roleName });
+            }
+
+            var result = await _userManager.AddToRoleAsync(user, dto.roleName);
+
+            if (result.Succeeded)
+            {
+                return ServiceResponse.Success($"Роль {dto.roleName} успішно видано користувачу {user.UserName}");
+            }
+
+            return ServiceResponse.Error($"Не вдалося видати роль користувачу {user.UserName}");
+        }
+
+        // Видалити конкретну роль у юзера
+        public async Task<ServiceResponse> RemoveRoleFromUserAsync(DeleteRoleFromUserDTO dto)
+        {
+            var user = await _userManager.FindByIdAsync(dto.userId);
+            if (user == null)
+            {
+                return ServiceResponse.Error($"Користувач з id {dto.userId} не знайдено");
+            }
+
+            var result = await _userManager.RemoveFromRoleAsync(user, dto.roleName);
+
+            if (result.Succeeded)
+            {
+                return ServiceResponse.Success($"Роль {dto.roleName} успішно знято з користувача {user.UserName}");
+            }
+            return ServiceResponse.Error($"Не вдалося зняти роль з користувача {user.UserName}");
         }
 
         public async Task<bool> IsUniqueNameAsync(string name)
