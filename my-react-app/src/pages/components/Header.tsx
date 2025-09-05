@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {FaShoppingCart, FaSignInAlt, FaUser} from "react-icons/fa";
+import {FaShoppingCart, FaSignInAlt, FaUser } from "react-icons/fa";
+import { BiCategory } from "react-icons/bi";
 
 const Header : React.FC = () => {
     return (
@@ -16,6 +17,9 @@ const Header : React.FC = () => {
                 </Link>
 
                 <nav className="flex items-center gap-4">
+                    <Link to="/category/List" className="text-gray-200 hover:text-white text-xl">
+                        <BiCategory />
+                    </Link>
                     <Link to="/usersList" className="text-gray-200 hover:text-white text-xl">
                         <FaUser/>
                     </Link>

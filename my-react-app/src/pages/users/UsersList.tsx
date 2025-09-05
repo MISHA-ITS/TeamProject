@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import type { IUserItem } from "../typs.ts";
-import type { IApiResponse } from "../typs.ts";
+import type { IUserItem } from "../types.ts";
+import type { IApiResponse } from "../types.ts";
 import UserRow from "./UserRow";
 import EnvConfig from "../../config/env.ts";
 

@@ -1,5 +1,5 @@
 // services/userService.ts
-import { IUserItem } from '../types';
+import {type IUserItem } from '../types';
 
 const API_URL = 'http://localhost:5137/api/user';
 
@@ -11,7 +11,7 @@ export const userService = {
         return response.json();
     },
 
-    // Видалити користувача (ID в тілі запиту)
+    // Видалити користувача
     delete: async (id: string): Promise<void> => {
         const response = await fetch(API_URL, {
             method: 'DELETE',
@@ -23,7 +23,7 @@ export const userService = {
         if (!response.ok) throw new Error('Помилка видалення користувача');
     },
 
-    // Оновити користувача (ID в тілі запиту)
+    // Оновити користувача
     update: async (user: IUserItem): Promise<IUserItem> => {
         const response = await fetch(API_URL, {
             method: 'PUT',
