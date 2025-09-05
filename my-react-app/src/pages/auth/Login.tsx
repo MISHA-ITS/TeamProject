@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { AiFillGoogleCircle } from "react-icons/ai";
+import EnvConfig from "../../config/env.ts";
 
 interface LoginState {
     email: string;
@@ -16,21 +17,54 @@ const Login: React.FC = () => {
     });
 
     const loginByGoogle = useGoogleLogin({
-        onSuccess: (tokenResponse) => {
-            console.log("Get google token", tokenResponse);
-            // Тут можна додати логіку авторизації через Google токен
+        onSuccess: async (tokenResponse) => {
+            console.log("Google tokenResponse:", tokenResponse);
+
+            // 1. Витягуємо id_token
+            const idToken = tokenResponse.id_token;
+            if (!idToken) {
+                setState((prev) => ({ ...prev, error: "Не отримано id_token від Google" }));
+                return;
+            }
+
+            // 2. Відправляємо його на бекенд
+            const googleDto = {
+                IdToken: idToken
+            };
+
+            try {
+                const response = await fetch(`${EnvConfig.API_URL}api/account/google-login`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(googleDto),
+                });
+
+                const data = await response.json();
+                if (!response.ok) {
+                    setState((prev) => ({ ...prev, error: data.message || "Помилка входу через Google" }));
+                    return;
+                }
+
+                localStorage.setItem("token", data.data);
+                window.location.href = "/";
+            } catch (error) {
+                setState((prev) => ({ ...prev, error: "Помилка при надсиланні id_token на сервер" }));
+            }
         },
         onError: () => {
             setState((prev) => ({ ...prev, error: "Google login failed" }));
         },
     });
 
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setState((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setState((prev) => ({ ...prev, error: null }));
 
@@ -39,10 +73,35 @@ const Login: React.FC = () => {
             return;
         }
 
-        // TODO: Виклик API для входу
-        console.log("Email:", state.email);
-        console.log("Password:", state.password);
+        try {
+            const response = await fetch(`${EnvConfig.API_URL}api/account/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: state.email,
+                    password: state.password,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                setState((prev) => ({ ...prev, error: data.message || "Помилка входу" }));
+                return;
+            }
+
+            // Збереження токена (наприклад, localStorage)
+            localStorage.setItem("token", data.data); // data.data - JWT токен
+
+            // Перенаправлення після успішного входу
+            window.location.href = "/"; // або використайте react-router navigate
+        } catch (error) {
+            setState((prev) => ({ ...prev, error: "Помилка мережі" }));
+        }
     };
+
 
     return (
         <div className="max-w-md mx-auto mt-20 p-6 border border-gray-300 rounded-md shadow-sm">

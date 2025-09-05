@@ -35,7 +35,11 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 //Add fluent validation
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterValdator>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+    });
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 //builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
