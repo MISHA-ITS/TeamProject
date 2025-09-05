@@ -47,6 +47,7 @@ const UserRow : React.FC<IUserRowProps> = ({ user, initials }) => {
                         <button className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-700 transition-colors flex items-center gap-1" onClick={() => alert(`Delete user ${user.id}`)}>
                             Видалити <FaTrash />
                         </button>
+
                     </div>
                 </li>
             </Link>
