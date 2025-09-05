@@ -25,6 +25,11 @@ export interface ICategoryItem {
     image?: string;
 }
 
+export interface ICategoryRowProps {
+    category: ICategoryItem;
+    initials: (name: string | null) => string;
+}
+
 export interface IProductItem {
     id: string;
     name: string;
