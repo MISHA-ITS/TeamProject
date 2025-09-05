@@ -13,6 +13,7 @@ using SPR311_DreamTeam_Rozetka.BLL.Services.JwtToken;
 using SPR311_DreamTeam_Rozetka.BLL.Services.Product;
 using SPR311_DreamTeam_Rozetka.BLL.Services.Role;
 using SPR311_DreamTeam_Rozetka.BLL.Services.User;
+using SPR311_DreamTeam_Rozetka.BLL.Services.Email;
 using SPR311_DreamTeam_Rozetka.BLL.Validators.Account;
 using SPR311_DreamTeam_Rozetka.DAL;
 using SPR311_DreamTeam_Rozetka.DAL.Initializer;
@@ -31,6 +32,7 @@ builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<IProductService, ProductSevice>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 //Add fluent validation
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterValdator>();
