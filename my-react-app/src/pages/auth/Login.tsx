@@ -21,7 +21,7 @@ const Login: React.FC = () => {
             console.log("Google tokenResponse:", tokenResponse);
 
             // 1. Витягуємо id_token
-            const idToken = tokenResponse.id_token;
+            const idToken = tokenResponse.access_token;
             if (!idToken) {
                 setState((prev) => ({ ...prev, error: "Не отримано id_token від Google" }));
                 return;
