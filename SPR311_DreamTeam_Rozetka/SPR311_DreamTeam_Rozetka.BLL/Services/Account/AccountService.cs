@@ -26,14 +26,16 @@ namespace SPR311_DreamTeam_Rozetka.BLL.Services.Account
                 return ServiceResponse.Error($"Адреса електронної пошти {dto.Email} вже існує");
             }
 
-            if (!await IsUniqueNameAsync(dto.Name))
-            {
-                return ServiceResponse.Error($"Ім'я {dto.Name} вже існує");
-            }
+            //if (!await IsUniqueNameAsync(dto.Name))
+            //{
+            //    return ServiceResponse.Error($"Ім'я {dto.Name} вже існує");
+            //}
 
             var user = new AppUser
             {
-                UserName = dto.Name,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                UserName = dto.Email,
                 Email = dto.Email
             };
 
