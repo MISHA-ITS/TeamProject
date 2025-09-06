@@ -33,3 +33,23 @@ export interface IProductItem {
     image: string | null;
     categories: ICategoryItem[];
 }
+
+export interface ApiResponse<T = any> {
+  data: T;
+  message?: string;
+  isSuccess: boolean;
+  errors?: string[];
+}
+
+export interface Product {
+  id: string;
+  name: string;
+  description?: string;
+  price: number;
+  stockQuantity: number;
+  imageUrl?: string;
+  categoryId: string;
+  category?: Category;
+  createdDate?: string;
+  updatedDate?: string;
+}

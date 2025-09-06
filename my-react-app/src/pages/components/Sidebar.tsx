@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import type { ICategoryItem } from "../typs";
-import type { IApiResponse } from "../typs.ts";
+import type { ICategoryItem } from "../types.ts";
+import type { IApiResponse } from "../types.ts";
 import EnvConfig from "../../config/env.ts";
 
 const Sidebar: React.FC = () => {
